@@ -16,20 +16,30 @@ import Navbar from "@/components/layout/navbar";
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/pokedex" component={Pokedex} />
-          <Route path="/pokemon/:name" component={PokemonDetails} />
-          <Route path="/abilities" component={Abilities} />
-          <Route path="/moves" component={Moves} />
-          <Route path="/items" component={Items} />
-          <Route path="/team-builder" component={TeamBuilder} />
-          <Route path="/favorites" component={() => <div>Favorites Page</div>} />
-          <Route component={NotFound} />
-        </Switch>
-      </main>
+      <Switch>
+        <Route path="/">
+          {/* No navbar on home page */}
+          <Home />
+        </Route>
+        <Route path="*">
+          {/* Show navbar on all other pages */}
+          <>
+            <Navbar />
+            <main className="flex-grow">
+              <Switch>
+                <Route path="/pokedex" component={Pokedex} />
+                <Route path="/pokemon/:name" component={PokemonDetails} />
+                <Route path="/abilities" component={Abilities} />
+                <Route path="/moves" component={Moves} />
+                <Route path="/items" component={Items} />
+                <Route path="/team-builder" component={TeamBuilder} />
+                <Route path="/favorites" component={() => <div>Favorites Page</div>} />
+                <Route component={NotFound} />
+              </Switch>
+            </main>
+          </>
+        </Route>
+      </Switch>
     </div>
   );
 }

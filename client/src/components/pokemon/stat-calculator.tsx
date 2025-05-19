@@ -124,39 +124,42 @@ const StatCalculator: React.FC<StatCalculatorProps> = ({ pokemon }) => {
   const finalStats = calculateStats();
 
   return (
-    <div>
+    <div className="dark:text-white">
       <h3 className="font-bold text-lg mb-3">Stat Calculator</h3>
       
       <div className="space-y-4">
-        <div className="space-y-1">
-          <Label>Level: {calculatorState.level}</Label>
+        {/* Level Slider - Full Width */}
+        <div className="space-y-1 w-full">
+          <Label className="dark:text-white">Level: {calculatorState.level}</Label>
           <Slider 
             min={1} 
             max={100} 
             step={1} 
             value={[calculatorState.level]} 
             onValueChange={([value]) => setCalculatorState(prev => ({ ...prev, level: value }))}
+            className="w-full"
           />
-          <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
             <span>1</span>
             <span>50</span>
             <span>100</span>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        {/* Nature and Ability Selectors */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label>Nature</Label>
+            <Label className="dark:text-white">Nature</Label>
             <Select 
               value={calculatorState.nature} 
               onValueChange={(value) => setCalculatorState(prev => ({ ...prev, nature: value }))}
             >
-              <SelectTrigger>
+              <SelectTrigger className="dark:text-white dark:border-gray-600 dark:bg-gray-700">
                 <SelectValue placeholder="Select Nature" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="dark:bg-gray-800 dark:text-white">
                 {natures?.map((nature) => (
-                  <SelectItem key={nature.nature} value={nature.nature}>
+                  <SelectItem key={nature.nature} value={nature.nature} className="dark:text-white dark:focus:bg-gray-700">
                     {nature.nature} 
                     {nature.increases !== nature.decreases && 
                       `(+${nature.increases}, -${nature.decreases})`}
@@ -166,103 +169,115 @@ const StatCalculator: React.FC<StatCalculatorProps> = ({ pokemon }) => {
             </Select>
           </div>
           <div>
-            <Label>Ability</Label>
+            <Label className="dark:text-white">Ability</Label>
             <Select defaultValue={pokemon.abilityI}>
-              <SelectTrigger>
+              <SelectTrigger className="dark:text-white dark:border-gray-600 dark:bg-gray-700">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={pokemon.abilityI}>{pokemon.abilityI}</SelectItem>
+              <SelectContent className="dark:bg-gray-800 dark:text-white">
+                <SelectItem value={pokemon.abilityI} className="dark:text-white dark:focus:bg-gray-700">
+                  {pokemon.abilityI}
+                </SelectItem>
                 {pokemon.abilityII && (
-                  <SelectItem value={pokemon.abilityII}>{pokemon.abilityII}</SelectItem>
+                  <SelectItem value={pokemon.abilityII} className="dark:text-white dark:focus:bg-gray-700">
+                    {pokemon.abilityII}
+                  </SelectItem>
                 )}
                 {pokemon.hiddenAbility && (
-                  <SelectItem value={pokemon.hiddenAbility}>{pokemon.hiddenAbility} (Hidden)</SelectItem>
+                  <SelectItem value={pokemon.hiddenAbility} className="dark:text-white dark:focus:bg-gray-700">
+                    {pokemon.hiddenAbility} (Hidden)
+                  </SelectItem>
                 )}
               </SelectContent>
             </Select>
           </div>
         </div>
         
-        <div>
-          <Label className="mb-2 block">IVs (0-31)</Label>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-            {Object.entries(calculatorState.ivs).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between">
-                <span className="text-xs">{formatStatName(key)}</span>
-                <Input
-                  type="number"
-                  min={0}
-                  max={31}
-                  value={value}
-                  onChange={(e) => {
-                    const val = Math.max(0, Math.min(31, parseInt(e.target.value) || 0));
-                    setCalculatorState(prev => ({
-                      ...prev,
-                      ivs: {
-                        ...prev.ivs,
-                        [key]: val
-                      }
-                    }));
-                  }}
-                  className="w-16 px-2 py-1 text-center text-sm"
-                />
+        {/* IV and EV Tables Side by Side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* IVs */}
+          <div>
+            <Label className="mb-2 block dark:text-white">IVs (0-31)</Label>
+            <div className="space-y-2 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
+              {Object.entries(calculatorState.ivs).map(([key, value]) => (
+                <div key={key} className="flex items-center justify-between">
+                  <span className="text-sm dark:text-white">{formatStatName(key)}</span>
+                  <Input
+                    type="number"
+                    min={0}
+                    max={31}
+                    value={value}
+                    onChange={(e) => {
+                      const val = Math.max(0, Math.min(31, parseInt(e.target.value) || 0));
+                      setCalculatorState(prev => ({
+                        ...prev,
+                        ivs: {
+                          ...prev.ivs,
+                          [key]: val
+                        }
+                      }));
+                    }}
+                    className="w-16 px-2 py-1 text-center text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* EVs */}
+          <div>
+            <Label className="mb-2 block dark:text-white">EVs (0-252)</Label>
+            <div className="space-y-2 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
+              {Object.entries(calculatorState.evs).map(([key, value]) => (
+                <div key={key} className="flex items-center justify-between">
+                  <span className="text-sm dark:text-white">{formatStatName(key)}</span>
+                  <Input
+                    type="number"
+                    min={0}
+                    max={252}
+                    value={value}
+                    onChange={(e) => handleEVChange(key as keyof typeof calculatorState.evs, parseInt(e.target.value) || 0)}
+                    className="w-16 px-2 py-1 text-center text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                  />
+                </div>
+              ))}
+              <div className="flex justify-between mt-1">
+                <span className="text-xs text-gray-500 dark:text-gray-300">EV Total:</span>
+                <span className={`text-xs font-medium ${totalEVs > 510 ? 'text-red-500' : 'text-gray-700 dark:text-gray-200'}`}>
+                  {totalEVs}/510
+                </span>
               </div>
-            ))}
+            </div>
           </div>
         </div>
         
-        <div>
-          <Label className="mb-2 block">EVs (0-252)</Label>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-            {Object.entries(calculatorState.evs).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between">
-                <span className="text-xs">{formatStatName(key)}</span>
-                <Input
-                  type="number"
-                  min={0}
-                  max={252}
-                  value={value}
-                  onChange={(e) => handleEVChange(key as keyof typeof calculatorState.evs, parseInt(e.target.value) || 0)}
-                  className="w-16 px-2 py-1 text-center text-sm"
-                />
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between mt-1">
-            <span className="text-xs text-gray-500">EV Total:</span>
-            <span className={`text-xs font-medium ${totalEVs > 510 ? 'text-red-500' : 'text-gray-700'}`}>
-              {totalEVs}/510
-            </span>
-          </div>
-        </div>
-        
-        <div className="pt-2 border-t border-gray-200">
-          <h4 className="text-sm font-medium mb-2">Calculated Stats</h4>
-          <div className="grid grid-cols-3 gap-2 text-center">
-            <div className="bg-gray-100 rounded-md p-2">
-              <span className="text-xs">HP</span>
-              <div className="text-lg font-bold">{finalStats.hp}</div>
+        {/* Calculated Stats in a Single Row */}
+        <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+          <h4 className="text-sm font-medium mb-2 dark:text-white">Calculated Stats</h4>
+          <div className="flex flex-wrap gap-2">
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-2 flex-1">
+              <span className="text-xs mr-1 dark:text-gray-300">HP:</span>
+              <div className="text-base font-bold dark:text-white">{finalStats.hp}</div>
             </div>
-            <div className="bg-gray-100 rounded-md p-2">
-              <span className="text-xs">Attack</span>
-              <div className="text-lg font-bold">{finalStats.attack}</div>
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-2 flex-1">
+              <span className="text-xs mr-1 dark:text-gray-300">Atk:</span>
+              <div className="text-base font-bold dark:text-white">{finalStats.attack}</div>
             </div>
-            <div className="bg-gray-100 rounded-md p-2">
-              <span className="text-xs">Defense</span>
-              <div className="text-lg font-bold">{finalStats.defense}</div>
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-2 flex-1">
+              <span className="text-xs mr-1 dark:text-gray-300">Def:</span>
+              <div className="text-base font-bold dark:text-white">{finalStats.defense}</div>
             </div>
-            <div className="bg-gray-100 rounded-md p-2">
-              <span className="text-xs">Sp. Atk</span>
-              <div className="text-lg font-bold">{finalStats.specialAttack}</div>
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-2 flex-1">
+              <span className="text-xs mr-1 dark:text-gray-300">SpA:</span>
+              <div className="text-base font-bold dark:text-white">{finalStats.specialAttack}</div>
             </div>
-            <div className="bg-gray-100 rounded-md p-2">
-              <span className="text-xs">Sp. Def</span>
-              <div className="text-lg font-bold">{finalStats.specialDefense}</div>
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-2 flex-1">
+              <span className="text-xs mr-1 dark:text-gray-300">SpD:</span>
+              <div className="text-base font-bold dark:text-white">{finalStats.specialDefense}</div>
             </div>
-            <div className="bg-gray-100 rounded-md p-2">
-              <span className="text-xs">Speed</span>
-              <div className="text-lg font-bold">{finalStats.speed}</div>
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-2 flex-1">
+              <span className="text-xs mr-1 dark:text-gray-300">Spe:</span>
+              <div className="text-base font-bold dark:text-white">{finalStats.speed}</div>
             </div>
           </div>
         </div>
