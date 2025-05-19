@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { Star } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TypeBadge from '@/components/pokemon/type-badge';
 import { useFavorites } from '@/hooks/use-favorites';
@@ -26,7 +26,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, isListView = false }
           <div>
             <div className="flex items-center mb-1">
               <span className="text-gray-500 text-xs mr-2">#{pokemon.pokedexNumber}</span>
-              <h3 className="font-bold">{pokemon.name}</h3>
+              <h3 className="font-bold my-auto">{pokemon.name}</h3>
             </div>
             <div className="flex space-x-1">
               <TypeBadge type={pokemon.primaryType} />
@@ -35,10 +35,6 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, isListView = false }
           </div>
           
           <div className="flex items-center gap-2">
-            <div className="hidden md:block text-right text-sm">
-              <div>HP: {pokemon.hp}</div>
-              <div>Atk: {pokemon.attack}</div>
-            </div>
             <Button 
               variant="ghost" 
               size="icon"
@@ -47,9 +43,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, isListView = false }
                 e.stopPropagation();
                 toggleFavorite(pokemon.name);
               }}
-              className="text-gray-400 hover:text-yellow-500"
+              className="text-gray-400 hover:text-red-500"
             >
-              <Star className={isFavorite ? 'fill-yellow-400 text-yellow-400' : ''} size={16} />
+              <Heart className={isFavorite ? 'fill-red-500 text-red-500' : ''} size={16} />
             </Button>
           </div>
         </div>
@@ -74,9 +70,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, isListView = false }
                 e.stopPropagation();
                 toggleFavorite(pokemon.name);
               }}
-              className="h-6 w-6 text-gray-400 hover:text-yellow-500"
+              className="h-6 w-6 text-gray-400 hover:text-red-500"
             >
-              <Star className={isFavorite ? 'fill-yellow-400 text-yellow-400' : ''} size={16} />
+              <Heart className={isFavorite ? 'fill-red-500 text-red-500' : ''} size={16} />
             </Button>
           </div>
           <h3 className="font-bold text-lg truncate">{pokemon.name}</h3>

@@ -141,11 +141,11 @@ const PokemonFiltersComponent: React.FC<PokemonFiltersProps> = ({
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox 
-                id="gmax-mobile" 
-                checked={filters.showGigantamax}
-                onCheckedChange={() => updateFilter('showGigantamax', !filters.showGigantamax)}
+                id="alternate-mobile" 
+                checked={filters.showAlternateForms}
+                onCheckedChange={() => updateFilter('showAlternateForms', !filters.showAlternateForms)}
               />
-              <Label htmlFor="gmax-mobile">Gigantamax Forms</Label>
+              <Label htmlFor="alternate-mobile">Alternate Forms</Label>
             </div>
           </div>
         </div>
