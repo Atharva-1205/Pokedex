@@ -13,7 +13,6 @@ import Footer from "@/components/layout/footer";
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={Home} />
@@ -22,7 +21,6 @@ function Router() {
           <Route component={NotFound} />
         </Switch>
       </main>
-      <Footer />
     </div>
   );
 }

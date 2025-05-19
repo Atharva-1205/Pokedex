@@ -154,14 +154,14 @@ const PokemonFiltersComponent: React.FC<PokemonFiltersProps> = ({
         <div className="mb-4">
           <Label className="font-medium mb-2">Egg Group</Label>
           <Select 
-            value={filters.eggGroups[0] || ""}
-            onValueChange={(value) => updateFilter('eggGroups', value ? [value] : [])}
+            value={filters.eggGroups[0] || "all"}
+            onValueChange={(value) => updateFilter('eggGroups', value && value !== "all" ? [value] : [])}
           >
             <SelectTrigger>
               <SelectValue placeholder="All Egg Groups" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Egg Groups</SelectItem>
+              <SelectItem value="all">All Egg Groups</SelectItem>
               {eggGroups.map(group => (
                 <SelectItem key={group} value={group}>{group}</SelectItem>
               ))}
@@ -278,14 +278,14 @@ const PokemonFiltersComponent: React.FC<PokemonFiltersProps> = ({
           <div className="mb-4">
             <Label className="font-medium mb-2">Egg Group</Label>
             <Select 
-              value={filters.eggGroups[0] || ""}
-              onValueChange={(value) => updateFilter('eggGroups', value ? [value] : [])}
+              value={filters.eggGroups[0] || "all"}
+              onValueChange={(value) => updateFilter('eggGroups', value && value !== "all" ? [value] : [])}
             >
               <SelectTrigger>
                 <SelectValue placeholder="All Egg Groups" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Egg Groups</SelectItem>
+                <SelectItem value="all">All Egg Groups</SelectItem>
                 {eggGroups.map(group => (
                   <SelectItem key={group} value={group}>{group}</SelectItem>
                 ))}
