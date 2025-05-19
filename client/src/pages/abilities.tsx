@@ -34,8 +34,7 @@ const Abilities: React.FC = () => {
   const { data: allPokemon } = useQuery({
     queryKey: ['/api/pokemon'],
     queryFn: async () => {
-      const res = await apiRequest('/api/pokemon');
-      return res as Pokemon[];
+      return apiRequest('/api/pokemon');
     }
   });
 
