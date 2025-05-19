@@ -10,6 +10,7 @@ import PokemonDetails from "@/pages/pokemon-details";
 import Abilities from "@/pages/abilities";
 import Moves from "@/pages/moves";
 import Items from "@/pages/items";
+import TeamBuilder from "@/pages/team-builder";
 import Navbar from "@/components/layout/navbar";
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
           <Route path="/abilities" component={Abilities} />
           <Route path="/moves" component={Moves} />
           <Route path="/items" component={Items} />
+          <Route path="/team-builder" component={TeamBuilder} />
           <Route path="/favorites" component={() => <div>Favorites Page</div>} />
           <Route component={NotFound} />
         </Switch>

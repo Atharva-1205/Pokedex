@@ -94,10 +94,6 @@ const Pokedex: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">PokéDex</h1>
-        <p className="text-gray-600">Browse through all Pokémon with detailed information</p>
-      </header>
       
       {/* Search and Filter Controls */}
       <div className="bg-white p-4 rounded-lg shadow-md mb-6">
