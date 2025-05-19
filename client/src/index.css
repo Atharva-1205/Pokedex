@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Flexo';
+  src: url('https://fonts.cdnfonts.com/css/flexo') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 0 100% 50%;  /* #FF0000 - Pokéball Red */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 100%;  /* #FFFFFF - Pokéball White */
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 210 100% 54%;  /* #2196F3 - Action Blue */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+
+  /* Pokemon Type Colors */
+  --normal: 60 30% 56%;       /* #A8A878 */
+  --fire: 21 89% 56%;         /* #F08030 */
+  --water: 219 82% 67%;       /* #6890F0 */
+  --grass: 99 47% 55%;        /* #78C850 */
+  --electric: 48 89% 58%;     /* #F8D030 */
+  --ice: 177 41% 73%;         /* #98D8D8 */
+  --fighting: 3 81% 46%;      /* #C03028 */
+  --poison: 292 60% 44%;      /* #A040A0 */
+  --ground: 44 75% 65%;       /* #E0C068 */
+  --flying: 255 55% 75%;      /* #A890F0 */
+  --psychic: 335 91% 66%;     /* #F85888 */
+  --bug: 67 59% 44%;          /* #A8B820 */
+  --rock: 48 57% 47%;         /* #B8A038 */
+  --ghost: 262 32% 52%;       /* #705898 */
+  --dark: 25 30% 36%;         /* #705848 */
+  --dragon: 258 76% 60%;      /* #7038F8 */
+  --steel: 240 13% 77%;       /* #B8B8D0 */
+  --fairy: 341 65% 77%;       /* #EE99AC */
+
+  /* Additional colors */
+  --poke-text: 0 0% 20%;      /* #333333 */
+  --poke-gold: 51 100% 50%;   /* #FFD700 */
+  --poke-light-gray: 0 0% 96%; /* #f4f4f4 */
+  --poke-medium-gray: 0 0% 88%; /* #e0e0e0 */
+  --poke-light-red: 0 100% 70%; /* #ff6666 */
+  --poke-dark-red: 0 100% 40%; /* #cc0000 */
+
+  /* Chart colors */
+  --chart-1: 0 100% 50%;      /* HP - Red */
+  --chart-2: 21 89% 56%;      /* Atk - Orange */
+  --chart-3: 48 89% 58%;      /* Def - Yellow */
+  --chart-4: 219 82% 67%;     /* SpA - Blue */  
+  --chart-5: 99 47% 55%;      /* SpD - Green */
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 0 100% 50%;    /* Pokéball Red */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 100%;   /* Pokéball White */
+  --secondary-foreground: 0 0% 98%;
+  --accent: 210 100% 54%;   /* Action Blue */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply font-body antialiased bg-background text-foreground;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-pokemon;
+  }
+}
+
+@layer components {
+  .font-pokemon {
+    font-family: 'Flexo', 'Roboto', sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .pokemon-type {
+    @apply px-2 py-1 rounded text-xs font-medium text-white text-center shadow-sm;
+  }
+  
+  .pokemon-card {
+    @apply bg-white rounded-lg shadow-md hover:shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .stat-bar {
+    @apply h-2 rounded-full overflow-hidden bg-muted;
+  }
+  
+  .hp { @apply bg-[#FF0000]; }
+  .attack { @apply bg-[#F08030]; }
+  .defense { @apply bg-[#F8D030]; }
+  .special-attack { @apply bg-[#6890F0]; }
+  .special-defense { @apply bg-[#78C850]; }
+  .speed { @apply bg-[#F85888]; }
+  
+  .type-normal { @apply bg-[#A8A878]; }
+  .type-fire { @apply bg-[#F08030]; }
+  .type-water { @apply bg-[#6890F0]; }
+  .type-grass { @apply bg-[#78C850]; }
+  .type-electric { @apply bg-[#F8D030]; }
+  .type-ice { @apply bg-[#98D8D8]; }
+  .type-fighting { @apply bg-[#C03028]; }
+  .type-poison { @apply bg-[#A040A0]; }
+  .type-ground { @apply bg-[#E0C068]; }
+  .type-flying { @apply bg-[#A890F0]; }
+  .type-psychic { @apply bg-[#F85888]; }
+  .type-bug { @apply bg-[#A8B820]; }
+  .type-rock { @apply bg-[#B8A038]; }
+  .type-ghost { @apply bg-[#705898]; }
+  .type-dark { @apply bg-[#705848]; }
+  .type-dragon { @apply bg-[#7038F8]; }
+  .type-steel { @apply bg-[#B8B8D0]; }
+  .type-fairy { @apply bg-[#EE99AC]; }
+  
+  /* Pokeball button styling */
+  .pokeball-button {
+    @apply relative overflow-hidden rounded-md shadow-md transition-transform duration-300 hover:scale-105 bg-white;
+  }
+  
+  .pokeball-button::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-1/2 bg-primary rounded-t-md -z-10;
+  }
+  
+  .pokeball-button::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-1/2 bg-secondary rounded-b-md -z-10;
+  }
+}
