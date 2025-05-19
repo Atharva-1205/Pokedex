@@ -7,9 +7,9 @@ export function useFilter() {
     generation: [],
     types: [],
     eggGroups: [],
-    showMega: true,
-    showRegionalVariants: true,
-    showGigantamax: true
+    showMega: false,
+    showRegionalVariants: false,
+    showAlternateForms: false
   });
 
   // Update a specific filter
@@ -30,9 +30,9 @@ export function useFilter() {
       generation: [],
       types: [],
       eggGroups: [],
-      showMega: true,
-      showRegionalVariants: true,
-      showGigantamax: true
+      showMega: false,
+      showRegionalVariants: false,
+      showAlternateForms: false
     });
   };
 
@@ -44,7 +44,7 @@ export function useFilter() {
     ...filters.eggGroups.map(group => `eggGroup-${group}`),
     ...(!filters.showMega ? ['hideMega'] : []),
     ...(!filters.showRegionalVariants ? ['hideRegionalVariants'] : []),
-    ...(!filters.showGigantamax ? ['hideGigantamax'] : [])
+    ...(!filters.showAlternateForms ? ['hideAlternateForms'] : [])
   ];
 
   return {

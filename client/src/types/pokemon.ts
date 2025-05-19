@@ -60,7 +60,7 @@ export interface PokemonFilters {
   eggGroups: string[];
   showMega: boolean;
   showRegionalVariants: boolean;
-  showGigantamax: boolean;
+  showAlternateForms: boolean;
 }
 
 export interface TypeEffectiveness {
