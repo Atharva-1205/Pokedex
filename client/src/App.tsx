@@ -15,7 +15,8 @@ function Router() {
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         <Switch>
-          <Route path="/" component={Pokedex} />
+          <Route path="/" component={Home} />
+          <Route path="/pokedex" component={Pokedex} />
           <Route path="/pokemon/:name" component={PokemonDetails} />
           <Route component={NotFound} />
         </Switch>
