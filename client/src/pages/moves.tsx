@@ -27,9 +27,17 @@ const Moves: React.FC = () => {
   const { data: moves, isLoading } = useQuery({
     queryKey: ['/api/moves'],
     queryFn: async () => {
-      const res = await fetch('/attached_assets/Moves.json');
-      const data = await res.json();
-      return data as Move[];
+      try {
+        const res = await fetch('/attached_assets/Moves.json');
+        if (!res.ok) {
+          throw new Error(`Failed to fetch moves: ${res.status}`);
+        }
+        const data = await res.json();
+        return data as Move[];
+      } catch (error) {
+        console.error("Error fetching moves:", error);
+        return [] as Move[];
+      }
     }
   });
 

@@ -34,7 +34,17 @@ const Abilities: React.FC = () => {
   const { data: allPokemon } = useQuery({
     queryKey: ['/api/pokemon'],
     queryFn: async () => {
-      return apiRequest('/api/pokemon');
+      try {
+        const response = await fetch('/api/pokemon');
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
+        const data = await response.json();
+        return data as Pokemon[];
+      } catch (error) {
+        console.error("Error fetching Pokémon:", error);
+        return [] as Pokemon[];
+      }
     }
   });
 
@@ -42,7 +52,7 @@ const Abilities: React.FC = () => {
   useEffect(() => {
     if (selectedAbility && allPokemon) {
       // Filter Pokemon with the selected ability (primary, secondary, or hidden)
-      const pokemon = allPokemon.filter(p => 
+      const pokemon = allPokemon.filter((p: Pokemon) => 
         p.abilityI === selectedAbility.Name || 
         p.abilityII === selectedAbility.Name || 
         p.hiddenAbility === selectedAbility.Name

@@ -20,9 +20,17 @@ const Items: React.FC = () => {
   const { data: items, isLoading } = useQuery({
     queryKey: ['/api/items'],
     queryFn: async () => {
-      const res = await fetch('/attached_assets/Items.json');
-      const data = await res.json();
-      return data as Item[];
+      try {
+        const res = await fetch('/attached_assets/Items.json');
+        if (!res.ok) {
+          throw new Error(`Failed to fetch items: ${res.status}`);
+        }
+        const data = await res.json();
+        return data as Item[];
+      } catch (error) {
+        console.error("Error fetching items:", error);
+        return [] as Item[];
+      }
     }
   });
 

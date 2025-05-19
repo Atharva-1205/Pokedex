@@ -7,8 +7,10 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Pokedex from "@/pages/pokedex";
 import PokemonDetails from "@/pages/pokemon-details";
+import Abilities from "@/pages/abilities";
+import Moves from "@/pages/moves";
+import Items from "@/pages/items";
 import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
 
 function Router() {
   return (
@@ -19,9 +21,9 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/pokedex" component={Pokedex} />
           <Route path="/pokemon/:name" component={PokemonDetails} />
-          <Route path="/abilities" component={() => <div>Abilities Page</div>} />
-          <Route path="/moves" component={() => <div>Moves Page</div>} />
-          <Route path="/items" component={() => <div>Items Page</div>} />
+          <Route path="/abilities" component={Abilities} />
+          <Route path="/moves" component={Moves} />
+          <Route path="/items" component={Items} />
           <Route path="/favorites" component={() => <div>Favorites Page</div>} />
           <Route component={NotFound} />
         </Switch>
