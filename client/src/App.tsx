@@ -13,11 +13,16 @@ import Footer from "@/components/layout/footer";
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+      <Navbar />
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/pokedex" component={Pokedex} />
           <Route path="/pokemon/:name" component={PokemonDetails} />
+          <Route path="/abilities" component={() => <div>Abilities Page</div>} />
+          <Route path="/moves" component={() => <div>Moves Page</div>} />
+          <Route path="/items" component={() => <div>Items Page</div>} />
+          <Route path="/favorites" component={() => <div>Favorites Page</div>} />
           <Route component={NotFound} />
         </Switch>
       </main>

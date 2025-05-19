@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Heart, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useFavorites } from '@/hooks/use-favorites';
 
 const Navbar: React.FC = () => {
   const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const { favorites } = useFavorites();
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    document.documentElement.classList.toggle('dark', newMode);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,23 +39,46 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className={`bg-primary text-white shadow-md sticky top-0 z-50 transition-all ${scrolled ? 'py-2' : 'py-4'}`}>
+    <nav className={`bg-red-600 text-white shadow-md sticky top-0 z-50 transition-all ${scrolled ? 'py-2' : 'py-4'}`}>
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         <div className="flex items-center">
           <div className="h-10 w-10 mr-3 bg-white rounded-full flex items-center justify-center">
-            <div className="h-6 w-6 bg-primary rounded-full border-2 border-gray-900"></div>
+            <div className="h-6 w-6 bg-red-600 rounded-full border-2 border-gray-900"></div>
           </div>
           <Link href="/">
             <a className="text-2xl font-bold">PokéDex Pro</a>
           </Link>
         </div>
         
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center gap-4">
+          {/* Favorites button */}
+          <Link href="/favorites">
+            <a className="flex items-center gap-1">
+              <Heart 
+                size={20} 
+                className={favorites.length > 0 ? "fill-red-500 text-red-500" : "text-white"} 
+              />
+              <span className="hidden md:inline">{favorites.length > 0 && `(${favorites.length})`}</span>
+            </a>
+          </Link>
+          
+          {/* Dark mode toggle */}
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={toggleDarkMode}
+            className="text-white"
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </Button>
+          
+          {/* Mobile menu toggle */}
           <Button 
             variant="ghost" 
             size="icon"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white"
+            className="text-white md:hidden"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
