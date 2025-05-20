@@ -73,18 +73,18 @@ const Pokedex: React.FC = () => {
         return false;
       }
 
-      // Variant filters
-      if (p.isVariant && !filters.showRegionalVariants) {
+      // Regional Variant filters (from Regional Variants.json)
+      if (p.isVariant && p.variantType === "Regional" && !filters.showRegionalVariants) {
         return false;
       }
 
-      // Mega Evolution filter (name contains "Mega")
+      // Mega Evolution filter (from Mega Evolutions.json)
       if (p.name.includes("Mega") && !filters.showMega) {
         return false;
       }
 
-      // Gigantamax filter (name contains "Gigantamax")
-      if (p.name.includes("Gigantamax") && !filters.showGigantamax) {
+      // Alternate Forms filter (from Alternate Forms.json)
+      if (p.isVariant && p.variantType === "Alternate" && !filters.showAlternateForms) {
         return false;
       }
 
