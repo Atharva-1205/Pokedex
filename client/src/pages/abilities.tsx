@@ -24,7 +24,7 @@ const Abilities: React.FC = () => {
   const { data: abilities, isLoading } = useQuery({
     queryKey: ['/api/abilities'],
     queryFn: async () => {
-      const res = await fetch('/attached_assets/Abilities.json');
+      const res = await fetch('/Abilities.json');
       const data = await res.json();
       return data as Ability[];
     }

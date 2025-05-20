@@ -28,7 +28,7 @@ const Moves: React.FC = () => {
     queryKey: ['/api/moves'],
     queryFn: async () => {
       try {
-        const res = await fetch('/attached_assets/Moves.json');
+        const res = await fetch('/Moves.json');
         if (!res.ok) {
           throw new Error(`Failed to fetch moves: ${res.status}`);
         }

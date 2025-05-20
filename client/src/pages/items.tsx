@@ -21,7 +21,7 @@ const Items: React.FC = () => {
     queryKey: ['/api/items'],
     queryFn: async () => {
       try {
-        const res = await fetch('/attached_assets/Items.json');
+        const res = await fetch('/Items.json');
         if (!res.ok) {
           throw new Error(`Failed to fetch items: ${res.status}`);
         }
